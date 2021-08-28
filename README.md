@@ -1,8 +1,8 @@
-# Font modules 
+# work sans variable Font modules 
 
 ## Magisk flashable Font modules.
 
-for recovery flashing check extension branch
+note - for recovery flashing check extension branch
 (updating soon)
 
 A magisk module to replace your system default font.
