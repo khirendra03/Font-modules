@@ -19,4 +19,4 @@ A magisk module to replace your system default font.
 
 ## follow us on [Telegram](https://t.me/marcellasne_zero)
 
-## for support [ support group](https://t.me/MFFMDisc)
+## for [support](https://t.me/MFFMDisc)
