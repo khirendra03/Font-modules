@@ -1,4 +1,4 @@
-# work sans variable Font modules 
+# IBM Plex Sans Font modules and extensions
 
 ## Magisk flashable Font modules.
 
@@ -9,7 +9,7 @@ A magisk module to replace your system default font.
 </p>-Featured advanced fucntioning OMF Template
 </p>-Bold option (for static typeface  only) via Config file (Storage/Oh My Font/Config). Edit and reflash and reboot.
 </p>-added android 12 support
-
+</p>-if you like my this attempt. Give this a star.
 ## Supported Roms
 
     Stock (AOSP/Pixel/LOS);
