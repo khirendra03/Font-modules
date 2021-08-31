@@ -18,3 +18,5 @@ A magisk module to replace your system default font.
     RealMe;
 
 ## follow us on [Telegram](https://t.me/marcellasne_zero)
+
+## for support [ support group](https://t.me/MFFMDisc)
