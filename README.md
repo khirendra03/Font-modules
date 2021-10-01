@@ -3,9 +3,12 @@
 
 ## modules & extensions are inside folder
 
-# follow us on [Telegram](https://t.me/marcellasne_zero)
+
 I upload modules in telegram first. 
-So to get more font modules follow us on telegram.
+So to get more font modules
+
+# follow us on [Telegram](https://t.me/marcellasne_zero)
+
 
 
 
