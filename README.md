@@ -20,9 +20,9 @@ A magisk module to replace your system default font.
     One Ui;  
     LG; 
     RealMe;
-## follow us on [Telegram](https://t.me/marcellasne_zero)
-## for [support](https://t.me/MFFMDisc)
+### follow us on [Telegram](https://t.me/marcellasne_zero)
+### for [support](https://t.me/MFFMDisc)
 
-## OMF by nong thai hong
+### Credit: OMF by nong thai hong
 
 Note:- I am not good with markdown. If you think you can do better job then making a good readme or wiki. You are welcome. 
