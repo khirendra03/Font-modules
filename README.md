@@ -1,11 +1,10 @@
 # Font-modules 
 ## Magisk flashable Font modules.
 
-## modules & extensions are inside folder
+- modules & extensions are inside folder
 
 
-I upload modules in telegram first. 
-So to get more font modules
+
 
 
 A magisk module to replace your system default font.
@@ -25,3 +24,5 @@ A magisk module to replace your system default font.
 ## for [support](https://t.me/MFFMDisc)
 
 ## OMF by nong thai hong
+
+Note:- I am not good with markdown. If you think you can do better job then making a good readme or wiki. You are welcome. 
