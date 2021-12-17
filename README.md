@@ -20,7 +20,7 @@ A magisk module to replace your system default font.
     One Ui;  
     LG; 
     RealMe;
-### follow us on [Telegram](https://t.me/marcellasne_zero)
+
 ### for [support](https://t.me/MFFMDisc)
 
 ### Credit: OMF by nong thai hong
