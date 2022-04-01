@@ -3,25 +3,19 @@
 
 - modules & extensions are inside folder
 
-
-
-
-
 A magisk module to replace your system default font.
-</p>-Featured advanced fucntioning OMF Template
-</p>-Bold option (for static typeface only) via Config file (Storage/Oh My Font/Config). Edit and reflash and reboot.
-</p>-added android 12 support
+- Featured advanced fucntioning OMF Template
+- Bold option (for static typeface only) via Config file (Storage/Oh My Font/Config). Edit and reflash and reboot.
+- added android 12 support
 
-## Supported Roms
+## NOTE:
+- all the old modules will be deleted i.e. only latest modules will be here.
+- you can find all old & new modules [here](https://sourceforge.net/projects/font-modules/files/)
 
-    Stock (AOSP/Pixel/LOS);
-    Miui (Global only, EU latest 12.5 beta); 
-    OOS 10/11 (Lockscreen Clock doesn't change for 11);  
-    One Ui;  
-    LG; 
-    RealMe;
-
-### for [support](https://t.me/MFFMDisc)
+## Important links:
+- for [support](https://t.me/MFFMDisc)
+- to know more about [OTL feature of a font](https://t.me/marcellasne_zero)
+- [Extensions](https://gitlab.com/nongthaihoang/oh_my_font#extensions)
 
 ### Credit: [OMF](https://gitlab.com/nongthaihoang/oh_my_font) by [Nông Thái Hoàng](https://gitlab.com/nongthaihoang)
 
