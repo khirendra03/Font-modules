@@ -1,5 +1,8 @@
+## 2022.07.13
+- adding OTL feature
+- update OMF template 
+
 ## 2022.05.02
-- Adding OTL feature
 - Adding changelog
 - Adding in-module updator
 
