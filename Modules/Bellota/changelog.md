@@ -1,3 +1,6 @@
+### 2022.12.23
+- updating module to latest OMF template 
+
 ### 2022.04.09
 - adding OTL feature
 - adding inmodule updator and changelog 
