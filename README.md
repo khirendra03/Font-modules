@@ -3,22 +3,31 @@
 # Font-modules 
 ## Magisk flashable Font modules.
 
+A Magisk module that allows you to easily change your system font to any font of your choice. This module uses the Oh My Font (OMF) template and includes advanced functionality, such as a bold option and support for Android 12.
+
+
 - modules & extensions are inside folder
 
-A magisk module to replace your system default font.
-- Featured advanced fucntioning OMF Template
-- Bold option (for static typeface only) via Config file (Storage/Oh My Font/Config). Edit and reflash and reboot.
-- added android 12 support
+## Features
+- Easy installation via Magisk Manager
+- Advanced OMF template
+- Bold option (for static typeface only) via config file
+- Support for Android 13
 
-## NOTE:
-- all the old modules will be deleted i.e. only latest modules will be here.
+## Installation
+1. Download the latest font module from the [releases](https://github.com/khirendra03/Font-modules/releases) section
+2. Open Magisk Manager and go to the Modules section
+3. Tap the plus button and select the downloaded module file
+4. Wait for the module to be installed and then reboot your device
+
+## Note
+- All old modules will be deleted and only the latest modules will be available in this repository. You can find all old and new modules on [SourceForge](https://sourceforge.net/projects/font-modules/files/)
 - you can find all old & new modules [here](https://sourceforge.net/projects/font-modules/files/)
 
-## Important links:
-- for [support](https://t.me/MFFMDisc)
-- to know more about [OTL feature of a font](https://t.me/marcellasne_zero)
-- [Extensions](https://gitlab.com/nongthaihoang/oh_my_font#extensions)
+## Important links
+- [Support](https://t.me/MFFMDisc) - Join our Telegram group for support and troubleshooting
+- [OTL feature of a font](https://t.me/marcellasne_zero) - Learn more about the OTL feature of a font
+- [Extensions](https://gitlab.com/nongthaihoang/oh_my_font#extensions) - Learn more about available extensions for OMF
 
-### Credit: [OMF](https://gitlab.com/nongthaihoang/oh_my_font) by [Nông Thái Hoàng](https://gitlab.com/nongthaihoang)
-
-**Note** :- I am not good with markdown. If you think you can do better job then making a good readme or wiki. You are welcome. 
+## Credits
+[Oh My Font](https://gitlab.com/nongthaihoang/oh_my_font) by [Nông Thái Hoàng](https://gitlab.com/nongthaihoang)
