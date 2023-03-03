@@ -18,6 +18,9 @@ IBM Plex™ is an international typeface family designed by Mike Abbink, IBM BX&
 
 
 Changelog:
+### 2023.02.27
+- updating module to latest template
+
 ### 2022.04.04
 - adding OTL feature
 - adding inmodule updator and changelog 
