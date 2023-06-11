@@ -20,6 +20,9 @@ stylesheet_absolute: true
 Mundial Sans Serif Font Family translates as “Worldwide”, this name is a statement: the idea of synthesizing characteristics from different traditions in a single typographic style. 
 
 Changelog:
+### 2023.06.10
+- adding support for magisk 26
+- updating module to latest OMF
 ### 2023.01.30
 - adding OTL feature
 - adding inmodule updator and changelog 
