@@ -16,6 +16,11 @@ stylesheet_absolute: true
 
 Urbanist is a low-contrast, geometric sans-serif inspired by Modernist typography and design. The project was launched by Corey Hu in 2020 with 9 weights and accompanying italics. Conceived from elementary shapes, Urbanist's neutrality makes it a versatile display font for print and digital mediums.
 
+### 2023.06.18
+- added support for magisk 26
+- adsed in-module updator
+- added info & changelog
+- updated module with latest OMF
 
 ### 2023.01.27
 - initial build.
