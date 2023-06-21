@@ -21,6 +21,10 @@ Inconsolata draws from many inspirations and sources. I was particularly struck 
 
 Changelog:
 
+### 2023.06.20
+* adding support to magisk 26
+* updating module to latest OMF
+
 ### 2022.03.27
 * adding mono variables
 
