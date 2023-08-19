@@ -1,3 +1,7 @@
+### 2023.08.07
+- updating module to latest omf template
+- adding support to magisk 26
+
 ### 2022.04.01
 - adding OTL feature
 
