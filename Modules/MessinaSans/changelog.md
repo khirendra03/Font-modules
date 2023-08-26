@@ -1,3 +1,8 @@
+
+### 2023.08.24
+- adding support to magisk 26
+- updating module to latest OMF
+
 ### 2022.04.04
 - adding OTL feature
 - adding inmodule updator and changelog
