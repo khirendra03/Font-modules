@@ -1,3 +1,6 @@
+### 2023.09.14
+- adjusted font matrix.
+- added support for magisk 26.
 
-### 2021.11.30
+### 2022.09.15
 - Initial build
