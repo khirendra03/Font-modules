@@ -1,3 +1,8 @@
+
+### 2024.01.26
+- Updated font file (build may 2023)
+- updated to latest OMF template.
+
 ### 2022.06.22
 - adding inmodule updator and changelog .
 - Updating module to latest OMF template.

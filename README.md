@@ -15,10 +15,11 @@ A Magisk module that allows you to easily change your system font to any font of
 - Support for Android 13
 
 ## Installation
-1. Download the latest font module from the [releases](https://github.com/khirendra03/Font-modules/releases) section
-2. Open Magisk Manager and go to the Modules section
-3. Tap the plus button and select the downloaded module file
-4. Wait for the module to be installed and then reboot your device
+1. Download the latest font module
+2. Instructions on how to download is on [releases](https://github.com/khirendra03/Font-modules/releases) section
+3. Open Magisk Manager and go to the Modules section
+4. Tap the plus button and select the downloaded module file
+5. Wait for the module to be installed and then reboot your device
 
 ## Note
 - All old modules will be deleted and only the latest modules will be available in this repository. You can find all old and new modules on [SourceForge](https://sourceforge.net/projects/font-modules/files/)
@@ -31,3 +32,7 @@ A Magisk module that allows you to easily change your system font to any font of
 
 ## Credits
 [Oh My Font](https://gitlab.com/nongthaihoang/oh_my_font) by [Nông Thái Hoàng](https://gitlab.com/nongthaihoang)
+
+---
+
+*Disclaimer: Use this module at your own risk. The developer is not responsible for any damage caused to your device.*
