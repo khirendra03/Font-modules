@@ -1,3 +1,6 @@
+### 2024.04.01
+- Updating module with latest OMF 
+
 ### 2023.06.23
 - adding support to magisk 26
 - Updating module with latest OMF 
