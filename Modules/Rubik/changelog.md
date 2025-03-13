@@ -6,6 +6,10 @@
 | License |	This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL |
 | Language support |	46 languages: Afrikaans, Albanian, Basque, Belarusian, Bosnian, Bulgarian, Catalan, Croatian, Czech, Danish, Dutch, English, Estonian, Faroese, Filipino, Finnish, French, Galician, German, Hebrew, Hungarian, Icelandic, Indonesian, Irish, Italian, Kazakh, Latvian, Lithuanian, Macedonian, Malay, Mongolian, Norwegian Bokmål, Polish, Portuguese, Romanian, Russian, Serbian, Slovak, Slovenian, Spanish, Swahili, Swedish, Turkish, Ukrainian, Welsh, Zulu |
 
+### 2025.04.12
+- Adding support to android 15.
+- updating module to latest OMF.
+
 ### 2023.06.15
 - Adding support to magisk 26
 - updating module to latest OMF.
