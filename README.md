@@ -21,6 +21,19 @@ A Magisk module that allows you to easily change your system font to any font of
 4. Tap the plus button and select the downloaded module file
 5. Wait for the module to be installed and then reboot your device
 
+## How to Create a Module
+1. Download the `Font-module-template.zip` from the `Template` directory.
+2. Extract the zip file.
+3. Replace the placeholder font files in the `system/fonts` directory with your desired font files.
+4. Update the `module.prop` file with the correct information for your module.
+5. Zip the entire directory and you're ready to go.
+
+## Contribution Guidelines
+- If you want to contribute to the project, you can submit new modules, report issues, or suggest improvements.
+- To submit a new module, please create a pull request on GitHub.
+- To report an issue or suggest an improvement, please open an issue on GitHub.
+- You can also join our [Telegram group](https://t.me/MFFMDisc) for support and troubleshooting.
+
 ## Note
 - All old modules will be deleted and only the latest modules will be available in this repository. You can find all old and new modules on [SourceForge](https://sourceforge.net/projects/font-modules/files/)
 - you can find all old & new modules [here](https://sourceforge.net/projects/font-modules/files/)
