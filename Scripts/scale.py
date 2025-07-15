@@ -93,3 +93,70 @@ def scale_metrics(font, scale):
         hhea.ascender = int(round(hhea.ascender * scale))
         hhea.descender = int(round(hhea.descender * scale))
         hhea.lineGap = int(round(hhea.lineGap * scale))
+
+def main():
+    """
+    Main function to run the scaling script.
+    - Prompts the user for a scaling factor.
+    - Finds all TTF files in the current directory.
+    - Backs up original fonts.
+    - Applies scaling to outlines, metrics, and variations.
+    - Saves the scaled fonts.
+    """
+    try:
+        scale_factor_str = input("Enter the scaling factor (e.g., 0.5 for 50%): ")
+        scale_factor = float(scale_factor_str)
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        return
+
+    # Create a backup directory if it doesn't exist
+    backup_dir = "backup_ttf"
+    if not os.path.exists(backup_dir):
+        os.makedirs(backup_dir)
+
+    # Find all TTF files in the current directory
+    font_files = glob.glob("*.ttf")
+    if not font_files:
+        print("No .ttf files found in the current directory.")
+        return
+
+    for font_path in font_files:
+        try:
+            print(f"Processing {font_path}...")
+            font = TTFont(font_path)
+
+            # Move the original font to the backup directory
+            backup_path = os.path.join(backup_dir, os.path.basename(font_path))
+            shutil.move(font_path, backup_path)
+
+            # Scale outlines based on font type
+            if "glyf" in font:
+                scale_glyf_font(font, scale_factor)
+            elif "CFF2" in font:
+                scale_cff2_font(font, scale_factor)
+            else:
+                print(f"Warning: {font_path} has neither 'glyf' nor 'CFF2' table. Skipping outline scaling.")
+
+            # Scale metrics
+            scale_metrics(font, scale_factor)
+
+            # Scale variations if present
+            if "gvar" in font:
+                scale_variations(font["gvar"].variations, scale_factor)
+            if "cvar" in font:
+                scale_variations(font["cvar"].variations, scale_factor)
+
+            # Save the scaled font
+            font.save(font_path)
+            print(f"Successfully scaled and saved {font_path}")
+
+        except Exception as e:
+            print(f"Error processing {font_path}: {e}")
+            # If an error occurs, try to restore the original font from backup
+            if os.path.exists(backup_path):
+                shutil.move(backup_path, font_path)
+                print(f"Restored original font: {font_path}")
+
+if __name__ == "__main__":
+    main()
