@@ -9,6 +9,8 @@ After processing each font, it moves the original file into a backup_ttf folder 
 import os
 import glob
 import shutil
+import argparse
+from datetime import datetime
 from fontTools.ttLib import TTFont
 from fontTools.pens.transformPen import TransformPen
 
@@ -70,6 +72,17 @@ def scale_variations(variations, scale):
             if var.delta is not None:
                 var.delta = [(dx * scale, dy * scale) for dx, dy in var.delta]
 
+def set_default_weight_to_regular(font):
+    """
+    If the font has a 'wght' axis in its 'fvar' table, set its default value to 400 (Regular).
+    """
+    if "fvar" in font:
+        for axis in font["fvar"].axes:
+            if axis.axisTag == "wght":
+                axis.defaultValue = 400
+                print("Set default weight to 400 (Regular).")
+                break
+
 def scale_metrics(font, scale):
     """
     Scale various metrics so that (for example) the advance widths, sidebearings,
@@ -97,23 +110,26 @@ def scale_metrics(font, scale):
 def main():
     """
     Main function to run the scaling script.
-    - Prompts the user for a scaling factor.
+    - Parses command-line arguments for scaling and setting default weight.
     - Finds all TTF files in the current directory.
-    - Backs up original fonts.
-    - Applies scaling to outlines, metrics, and variations.
-    - Saves the scaled fonts.
+    - Backs up original fonts to a timestamped directory.
+    - Applies scaling and/or sets default weight.
+    - Saves the modified fonts.
     """
-    try:
-        scale_factor_str = input("Enter the scaling factor (e.g., 0.5 for 50%): ")
-        scale_factor = float(scale_factor_str)
-    except ValueError:
-        print("Invalid input. Please enter a number.")
+    parser = argparse.ArgumentParser(description="Scale fonts and/or set default weight to Regular.")
+    parser.add_argument("--scale-factor", type=float, help="The scaling factor (e.g., 0.5 for 50%%).")
+    parser.add_argument("--set-weight-regular", action="store_true", help="Set the default weight to 400 (Regular).")
+    args = parser.parse_args()
+
+    if not args.scale_factor and not args.set_weight_regular:
+        print("No action specified. Use --scale-factor or --set-weight-regular.")
         return
 
-    # Create a backup directory if it doesn't exist
-    backup_dir = "backup_ttf"
-    if not os.path.exists(backup_dir):
-        os.makedirs(backup_dir)
+    # Create a timestamped backup directory
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    backup_dir = f"backup_ttf_{timestamp}"
+    os.makedirs(backup_dir)
+    print(f"Backup directory created: {backup_dir}")
 
     # Find all TTF files in the current directory
     font_files = glob.glob("*.ttf")
@@ -122,39 +138,55 @@ def main():
         return
 
     for font_path in font_files:
+        backup_path = os.path.join(backup_dir, os.path.basename(font_path))
         try:
             print(f"Processing {font_path}...")
             font = TTFont(font_path)
 
             # Move the original font to the backup directory
-            backup_path = os.path.join(backup_dir, os.path.basename(font_path))
             shutil.move(font_path, backup_path)
 
-            # Scale outlines based on font type
-            if "glyf" in font:
-                scale_glyf_font(font, scale_factor)
-            elif "CFF2" in font:
-                scale_cff2_font(font, scale_factor)
+            modified = False
+            if args.scale_factor:
+                scale_factor = args.scale_factor
+                print(f"Scaling by factor {scale_factor}...")
+                # Scale outlines based on font type
+                if "glyf" in font:
+                    scale_glyf_font(font, scale_factor)
+                elif "CFF2" in font:
+                    scale_cff2_font(font, scale_factor)
+                else:
+                    print(f"Warning: {font_path} has neither 'glyf' nor 'CFF2' table. Skipping outline scaling.")
+
+                # Scale metrics
+                scale_metrics(font, scale_factor)
+
+                # Scale variations if present
+                if "gvar" in font:
+                    scale_variations(font["gvar"].variations, scale_factor)
+                if "cvar" in font:
+                    scale_variations(font["cvar"].variations, scale_factor)
+                modified = True
+
+            if args.set_weight_regular:
+                print("Setting default weight to 400...")
+                set_default_weight_to_regular(font)
+                modified = True
+
+            # Save the modified font back to the original path
+            if modified:
+                font.save(font_path)
+                print(f"Successfully processed and saved {font_path}")
             else:
-                print(f"Warning: {font_path} has neither 'glyf' nor 'CFF2' table. Skipping outline scaling.")
+                # If no modifications were made, move the original font back
+                shutil.move(backup_path, font_path)
+                print(f"No operations performed on {font_path}, restored original.")
 
-            # Scale metrics
-            scale_metrics(font, scale_factor)
-
-            # Scale variations if present
-            if "gvar" in font:
-                scale_variations(font["gvar"].variations, scale_factor)
-            if "cvar" in font:
-                scale_variations(font["cvar"].variations, scale_factor)
-
-            # Save the scaled font
-            font.save(font_path)
-            print(f"Successfully scaled and saved {font_path}")
 
         except Exception as e:
             print(f"Error processing {font_path}: {e}")
             # If an error occurs, try to restore the original font from backup
-            if os.path.exists(backup_path):
+            if os.path.exists(backup_path) and not os.path.exists(font_path):
                 shutil.move(backup_path, font_path)
                 print(f"Restored original font: {font_path}")
 

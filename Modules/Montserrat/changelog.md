@@ -3,10 +3,16 @@
 | Font | Montserrat |
 | Copyright notice | Copyright 2011 The Montserrat MFFM Project Authors |
 | Font subfamily | Regular |
-| Version | 8.000 |
+| Version | 9.000 |
 | Manufacturer name | Julieta Ulanovsky |
 | Designer | Julieta Ulanovsky |
-| License description | SIL Open Font License, Version 1.1 |
+| License description | This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://openfontlicense.org |
+| URL license info | https://openfontlicense.org |
+
+### 2025.07.22
+- updated font files to latest v9.0
+- updating module to latest OMF template.
+- added support for android 15
 
 ### 2024.04.09
 - updating module to latest omf template
