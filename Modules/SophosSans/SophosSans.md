@@ -13,9 +13,10 @@ stylesheet_url:
 stylesheet_absolute: false
 ---
 
-This is a protected webfont and is intended for CSS @font-face use ONLY. Reverse engineering this font is strictly prohibited. This software is the property of Emtype Foundry and may not be reproduced, used, displayed, modified, disclosed or transferred. For use this Webfont you may obtain a valid license at http://www.emtype.net 
-EMT2016911330Sophos
 
+### 2025.08.01
+- Updating module to latest OMF template 
+- added support for android 15
 
 ### 2022.04.21
 - Adding OTL feature.
