@@ -1,17 +1,23 @@
 #!/bin/bash
 
+# Improved Magisk Font Module Creator (OMF Based)
+# Author: khirendra03
+# Refined by Gemini CLI
+
 # Default values
 AUTHOR="khirendra03"
+TEMPLATE_DIR="Template"
+MODULES_ROOT="Modules"
 
 # Help message
 function show_help {
     echo "Usage: $0 --name <font_name> --version <version> --fonts <path_to_fonts_dir> --changelog <"changelog_message"> [--author <author_name>]"
     echo
-    echo "   --name          : Name of the font (e.g., "Roboto")."
-    echo "   --version       : Version of the module (e.g., "v1.0")."
+    echo "   --name          : Name of the font (e.g., \"Roboto\")."
+    echo "   --version       : Version of the module (e.g., \"3.5\")."
     echo "   --fonts         : Path to the directory containing the font files (.ttf or .otf)."
     echo "   --changelog     : A message describing the changes for this version, enclosed in quotes."
-    echo "   --author        : (Optional) The name of the module creator. Defaults to 'khirendra03'."
+    echo "   --author        : (Optional) The name of the module creator. Defaults to '$AUTHOR'."
 }
 
 # Parse command-line arguments
@@ -35,74 +41,86 @@ if [ -z "$FONT_NAME" ] || [ -z "$VERSION" ] || [ -z "$FONTS_DIR" ] || [ -z "$CHA
     exit 1
 fi
 
-# --- Script Execution ---
-
-# Variables
-MODULE_DIR="Modules/$FONT_NAME"
-ZIP_NAME="${FONT_NAME// /_}[OMF].zip"
-TEMP_DIR=$(mktemp -d)
-
-echo "Creating module for $FONT_NAME version $VERSION..."
-
-# 1. Create module directory if it doesn't exist
-mkdir -p "$MODULE_DIR"
-echo "Module directory: $MODULE_DIR"
-
-# 2. Unpack the template
-echo "Unpacking template..."
-unzip -q "Template/Font-module-template.zip" -d "$TEMP_DIR"
-
-# 3. Customize module.prop
-echo "Customizing module.prop..."
-sed -i "s/^id=.*/id=${FONT_NAME// /_}/" "$TEMP_DIR/module.prop"
-sed -i "s/^name=.*/name=$FONT_NAME/" "$TEMP_DIR/module.prop"
-sed -i "s/^version=.*/version=$VERSION/" "$TEMP_DIR/module.prop"
-sed -i "s/^versionCode=.*/versionCode=$(echo $VERSION | tr -d -c 0-9)/" "$TEMP_DIR/module.prop"
-sed -i "s/^author=.*/author=$AUTHOR/" "$TEMP_DIR/module.prop"
-sed -i "s/^description=.*/description=Font module for $FONT_NAME/" "$TEMP_DIR/module.prop"
-
-# 4. Add font files
-echo "Adding font files from $FONTS_DIR..."
-cp -r "$FONTS_DIR"/* "$TEMP_DIR/system/fonts/"
-
-# 5. Package the module
-echo "Packaging module into $ZIP_NAME..."
-(cd "$TEMP_DIR" && zip -r9q "../../$MODULE_DIR/$ZIP_NAME" .)
-
-# 6. Update changelog.md
-CHANGELOG_FILE="$MODULE_DIR/changelog.md"
-echo "Updating changelog: $CHANGELOG_FILE"
-if [ -f "$CHANGELOG_FILE" ]; then
-    # Prepend new entry to existing changelog
-    echo -e "## $VERSION
-- $CHANGELOG_MSG
-
-$(cat "$CHANGELOG_FILE")" > "$CHANGELOG_FILE"
-else
-    # Create new changelog
-    echo -e "## $VERSION
-- $CHANGELOG_MSG" > "$CHANGELOG_FILE"
+# Validate Template
+if [ ! -d "$TEMPLATE_DIR" ] || [ ! -f "$TEMPLATE_DIR/module.prop" ]; then
+    echo "Error: Template directory '$TEMPLATE_DIR' is missing or invalid."
+    echo "Please ensure the OMF template is downloaded into the '$TEMPLATE_DIR' folder."
+    exit 1
 fi
 
-# 7. Create/Update update.json
-UPDATE_JSON_FILE="$MODULE_DIR/update.json"
-echo "Creating/Updating update.json: $UPDATE_JSON_FILE"
-# Construct the JSON content
-JSON_CONTENT=$(cat <<EOF
+# --- Script Execution ---
+
+MODULE_PATH="$MODULES_ROOT/$FONT_NAME"
+ZIP_NAME="${FONT_NAME// /_}[OMF].zip"
+TEMP_BUILD_DIR=$(mktemp -d)
+VERSION_CODE=$(date +%Y%m%d)
+
+echo ">>> Creating module for $FONT_NAME version $VERSION ($VERSION_CODE)..."
+
+# 1. Prepare Build Directory
+mkdir -p "$MODULE_PATH"
+cp -r "$TEMPLATE_DIR"/* "$TEMP_BUILD_DIR/"
+
+# 2. Customize module.prop
+echo ">>> Customizing module.prop..."
+# Create/Overwrite module.prop from template
+cat > "$TEMP_BUILD_DIR/module.prop" <<EOF
+id=${FONT_NAME// /_}
+name=$FONT_NAME
+version=$VERSION
+versionCode=$VERSION_CODE
+author=$AUTHOR
+description=Font module for $FONT_NAME (OMF Based)
+EOF
+
+# 3. Add font files and rename them
+echo ">>> Adding and renaming font files..."
+mkdir -p "$TEMP_BUILD_DIR/system/fonts"
+cp -r "$FONTS_DIR"/* "$TEMP_BUILD_DIR/system/fonts/"
+
+# Run rename script if it exists, otherwise provide a warning
+if [ -f "Scripts/rename_fonts.sh" ]; then
+    # Modify rename_fonts.sh to work in the temp directory
+    cp Scripts/rename_fonts.sh "$TEMP_BUILD_DIR/rename.sh"
+    (cd "$TEMP_BUILD_DIR" && bash rename.sh system/fonts)
+    rm "$TEMP_BUILD_DIR/rename.sh"
+else
+    echo "Warning: Scripts/rename_fonts.sh not found. Fonts might not be correctly named for OMF."
+fi
+
+# 4. Package the module
+echo ">>> Packaging module into $ZIP_NAME..."
+(cd "$TEMP_BUILD_DIR" && zip -r9q "../../$MODULE_PATH/$ZIP_NAME" .)
+
+# 5. Update changelog.md
+CHANGELOG_FILE="$MODULE_PATH/changelog.md"
+echo ">>> Updating changelog: $CHANGELOG_FILE"
+DATE_NOW=$(date +%Y.%m.%d)
+if [ -f "$CHANGELOG_FILE" ]; then
+    # Prepend new entry
+    TEMP_CHANGELOG=$(mktemp)
+    echo -e "### $DATE_NOW ($VERSION)\n- $CHANGELOG_MSG\n\n$(cat "$CHANGELOG_FILE")" > "$TEMP_CHANGELOG"
+    mv "$TEMP_CHANGELOG" "$CHANGELOG_FILE"
+else
+    # Create new
+    echo -e "### $DATE_NOW ($VERSION)\n- $CHANGELOG_MSG" > "$CHANGELOG_FILE"
+fi
+
+# 6. Create/Update update.json
+UPDATE_JSON_FILE="$MODULE_PATH/update.json"
+echo ">>> Updating update.json..."
+# Construct the JSON content (escaped for shell)
+cat > "$UPDATE_JSON_FILE" <<EOF
 {
   "version": "$VERSION",
-  "versionCode": $(echo $VERSION | tr -d -c 0-9),
-  "zipUrl": "https://github.com/khirendra03/Font-modules/releases/download/$VERSION/$ZIP_NAME",
+  "versionCode": $VERSION_CODE,
+  "zipUrl": "https://raw.githubusercontent.com/khirendra03/Font-modules/main/Modules/${FONT_NAME// /%20}/$ZIP_NAME",
   "changelog": "https://raw.githubusercontent.com/khirendra03/Font-modules/main/Modules/${FONT_NAME// /%20}/changelog.md"
 }
 EOF
-)
-echo "$JSON_CONTENT" > "$UPDATE_JSON_FILE"
 
+# 7. Cleanup
+echo ">>> Cleaning up..."
+rm -rf "$TEMP_BUILD_DIR"
 
-# 8. Cleanup
-echo "Cleaning up temporary files..."
-rm -rf "$TEMP_DIR"
-
-echo "Module creation complete!"
-echo "Module located at: $MODULE_DIR/$ZIP_NAME"
+echo ">>> SUCCESS: Module created at: $MODULE_PATH/$ZIP_NAME"

@@ -29,8 +29,11 @@ if [ "$1" == "--revert" ]; then
 fi
 
 # --- Main Logic ---
-# Enter the fonts directory
-cd fonts || { echo "Error: 'fonts' directory not found."; exit 1; }
+# Use the first argument as the fonts directory, or default to 'fonts'
+TARGET_DIR="${1:-fonts}"
+
+# Enter the target directory
+cd "$TARGET_DIR" || { echo "Error: '$TARGET_DIR' directory not found."; exit 1; }
 
 # --- Revert Functionality ---
 if [ "$REVERT" = true ]; then

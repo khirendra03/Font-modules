@@ -35,29 +35,28 @@ Easily change your Android system fonts on devices running latest Android, with 
 
 ## Creating Your Own Font Module
 
-You can easily make your own font module using the **provided template**.
+You can easily create your own font module using the provided automation script.
 
-1. Download the `Template/` folder from this repo
-2. Replace the font files inside `system/fonts/` with your custom `.ttf` or `.otf` fonts
-3. Edit the `module.prop` file to set:
-   ```properties
-   id=my.custom.font
-   name=My Custom Font
-   version=1.0
-   versionCode=1
-   author=Your Name
-   description=Custom font module using OMF template
-4. Zip the entire directory and you're ready to go.
+1. Prepare your font files (`.ttf` or `.otf`) in a folder.
+2. Run the creation script from the root of the repository:
+   ```bash
+   bash Scripts/create_module.sh --name "MyFont" --version "1.0" --fonts "/path/to/my/fonts" --changelog "Initial release"
+   ```
+3. The script will:
+   - Automatically rename fonts to OMF conventions (using `Scripts/rename_fonts.sh`).
+   - Package the module using the `Template/` folder.
+   - Update `update.json` and `changelog.md` in the module's directory.
+4. Your flashable ZIP will be located in `Modules/MyFont/`.
 
 ## Repository Structure
-bash
-Copy code
+```bash
 Font-modules/
 ├── Modules/       # Ready-to-use font modules
-├── Template/      # Base template for creating modules
-├── Scripts/       # Optional helper scripts
-├── Extensions/    # Additional add-ons
+├── Template/      # OMF-based template for creating modules
+├── Extensions/    # Additional add-ons (Serif, Monospace, Devanagari)
+├── Scripts/       # Helper scripts for renaming and module creation
 └── README.md      # This file
+```
 
 ## Contribution Guidelines
 - If you want to contribute to the project, you can submit new modules, report issues, or suggest improvements.

@@ -1,0 +1,7 @@
+id=ohmyfont
+name=Oh My Font [M3E]
+version=2025.10.1901
+versionCode=2025101901
+author=nongthaihoang @ GitLab
+description=Advanced Android Typography.
+updateJson=https://gitlab.com/nongthaihoang/oh_my_font/-/raw/master/update.json
