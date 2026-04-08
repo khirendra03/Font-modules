@@ -1,32 +1,63 @@
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fkhirendra03%2FFont-modules&count_bg=%2342B8CF&title_bg=%23505A58&icon=postwoman.svg&icon_color=%239AF2E9&title=Visitors&edge_flat=false)](https://hits.seeyoufarm.com)
+# Magisk flashable Font modules
+[![GitHub release](https://img.shields.io/github/v/release/khirendra03/Font-modules)](https://github.com/khirendra03/Font-modules/releases)
+[![License](https://img.shields.io/github/license/khirendra03/Font-modules)](LICENSE)
+[![Downloads](https://img.shields.io/github/downloads/khirendra03/Font-modules/total)](https://github.com/khirendra03/Font-modules/releases)
+[![Issues](https://img.shields.io/github/issues/khirendra03/Font-modules)](https://github.com/khirendra03/Font-modules/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/khirendra03/Font-modules)](https://github.com/khirendra03/Font-modules/commits/main)
 
-# Font-modules 
-## Magisk flashable Font modules.
+ **Magisk-flashable font modules** based on the **Oh My Font (OMF) template**.  
+Easily change your Android system fonts on devices running latest Android, with optional bold styling support.
 
-A Magisk module that allows you to easily change your system font to any font of your choice. This module uses the Oh My Font (OMF) template and includes advanced functionality, such as a bold option and support for Android 12.
+---
 
+## ✨ Features
+- 📱 Works on Android
+- 🎨 Multiple font styles available
+- 🖋 Supports **bold text styling**
+- ⚙️ Based on the **OMF Magisk template**
+- 🛠 Simple install — just flash in Magisk Manager
 
-- modules & extensions are inside folder
-
-## Features
-- Easy installation via Magisk Manager
-- Advanced OMF template
-- Bold option (for static typeface only) via config file
-- Support for Android 13
+---
 
 ## Installation
-1. Download the latest font module
-2. Instructions on how to download is on [releases](https://github.com/khirendra03/Font-modules/releases) section
-3. Open Magisk Manager and go to the Modules section
-4. Tap the plus button and select the downloaded module file
-5. Wait for the module to be installed and then reboot your device
 
-## How to Create a Module
-1. Download the `Font-module-template.zip` from the `Template` directory.
-2. Extract the zip file.
-3. Replace the placeholder font files in the `system/fonts` directory with your desired font files.
-4. Update the `module.prop` file with the correct information for your module.
-5. Zip the entire directory and you're ready to go.
+### 1. Download
+- Get the latest module ZIP from the **[inside font folder](https://github.com/khirendra03/Font-modules/modules)** page  
+  or from [SourceForge](https://sourceforge.net/projects/font-modules/files/Modules/).
+
+### 2. Flash via Magisk Manager
+1. Open **Magisk Manager**
+2. Go to **Modules → Install from storage**
+3. Select the downloaded `.zip` file
+4. Reboot your device
+
+---
+
+## Creating Your Own Font Module
+
+You can easily make your own font module using the **provided template**.
+
+1. Download the `Template/` folder from this repo
+2. Replace the font files inside `system/fonts/` with your custom `.ttf` or `.otf` fonts
+3. Edit the `module.prop` file to set:
+   ```properties
+   id=my.custom.font
+   name=My Custom Font
+   version=1.0
+   versionCode=1
+   author=Your Name
+   description=Custom font module using OMF template
+4. Zip the entire directory and you're ready to go.
+
+## Repository Structure
+bash
+Copy code
+Font-modules/
+├── Modules/       # Ready-to-use font modules
+├── Template/      # Base template for creating modules
+├── Scripts/       # Optional helper scripts
+├── Extensions/    # Additional add-ons
+└── README.md      # This file
 
 ## Contribution Guidelines
 - If you want to contribute to the project, you can submit new modules, report issues, or suggest improvements.
