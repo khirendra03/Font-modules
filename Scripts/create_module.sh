@@ -55,6 +55,9 @@ ZIP_NAME="${FONT_NAME// /_}[OMF].zip"
 TEMP_BUILD_DIR=$(mktemp -d)
 VERSION_CODE=$(date +%Y%m%d)
 
+# Convert MODULE_PATH to absolute path to avoid issues with relative paths
+ABSOLUTE_MODULE_PATH="$(cd "$(dirname "$MODULE_PATH")" && pwd)/$(basename "$MODULE_PATH")"
+
 echo ">>> Creating module for $FONT_NAME version $VERSION ($VERSION_CODE)..."
 
 # 1. Prepare Build Directory
@@ -90,7 +93,15 @@ fi
 
 # 4. Package the module
 echo ">>> Packaging module into $ZIP_NAME..."
-(cd "$TEMP_BUILD_DIR" && zip -r9q "../../$MODULE_PATH/$ZIP_NAME" .)
+# Use absolute path to ensure zip file is created correctly
+(cd "$TEMP_BUILD_DIR" && zip -r9q "$ABSOLUTE_MODULE_PATH/$ZIP_NAME" .)
+
+# Check if zip command was successful
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to create zip file. Check permissions and disk space."
+    rm -rf "$TEMP_BUILD_DIR"
+    exit 1
+fi
 
 # 5. Update changelog.md
 CHANGELOG_FILE="$MODULE_PATH/changelog.md"
